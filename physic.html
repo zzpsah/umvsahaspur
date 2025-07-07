@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Exam Solutions - June 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // MathJax configuration to render LaTeX formulas
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* bg-slate-100 */
+        }
+        .question-card {
+            transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .answer-section {
+            background-color: #f8fafc; /* bg-slate-50 */
+            border-left: 4px solid #3b82f6; /* border-blue-500 */
+        }
+        .option-item.correct {
+            background-color: #e0f2fe; /* bg-sky-100 */
+            border-left: 4px solid #0284c7; /* border-sky-600 */
+            color: #0369a1; /* text-sky-800 */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Physics Quarterly Examination</h1>
+            <p class="text-lg text-slate-600 mt-2">Solutions for June 2025 Exam</p>
+        </header>
+
+        <main id="questions-container" class="space-y-6">
+            <!-- Questions will be dynamically inserted here by JavaScript -->
+        </main>
+
+        <footer class="mt-12">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div id="answer-key-header" class="flex justify-center items-center cursor-pointer" onclick="toggleAnswerKey()">
+                    <h2 class="text-2xl font-bold">Quick Answer Key</h2>
+                    <svg id="answer-key-arrow" class="w-6 h-6 ml-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div id="answer-key-content" class="hidden mt-4">
+                    <div class="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 gap-4 text-center">
+                        <!-- Answer key will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const questionsData = [
+            { q: 1, a: 'B', en: "The dimensional formula of electric charge is", hi: "वैद्युत आवेश का विमीय सूत्र है", opts: ["$AT^{0}$", "AT", "$AT^{-1}$", "$AT^{-2}$"], exp: "Electric charge is the product of electric current and time (Q = It). The dimensional formula for current is [A] and for time is [T], so the dimensional formula for charge is [AT]." },
+            { q: 2, a: 'D', en: "The law governing the force acting between two electric charges is called as", hi: "दो वैद्युत आवेशों के बीच लगने वाले बल को नियंत्रित करने वाले नियम को कहा जाता है", opts: ["Ampere's law", "Faraday's law", "Ohm's law", "Coulomb's law"], exp: "Coulomb's law quantifies the electrostatic force of attraction or repulsion between two stationary, electrically charged particles." },
+            { q: 3, a: 'C', en: "Which of the following physical quantities is a vector?", hi: "निम्नलिखित में से कौन-सी भौतिक राशि सदिश है ?", opts: ["Electric potential", "Electric flux", "Electric intensity", "Electric potential energy"], exp: "Electric intensity (or electric field) has both magnitude and direction, making it a vector quantity. The other options are scalar quantities." },
+            { q: 4, a: 'A', en: "The torque acting on a dipole of moment $\\vec{p}$ in an electric field $\\vec{E}$ is", hi: "$\\vec{E}$ वैद्युत क्षेत्र में $\\vec{p}$ आघूर्ण वाले द्विध्रुव पर लगने वाला बल-आघूर्ण है", opts: ["$\\vec{p}\\times\\vec{E}$", "$\\vec{p}\\cdot\\vec{E}$", "$\\vec{E}\\cdot\\vec{p}$", "$\\frac{1}{3}\\vec{p}\\times\\vec{E}$"], exp: "The torque on an electric dipole in an external electric field is defined by the cross product of the dipole moment vector and the electric field vector." },
+            { q: 5, a: 'B', en: "The unit of electric field intensity is", hi: "वैद्युत क्षेत्र की तीव्रता का मात्रक है", opts: ["C/N", "N/C", "NC", "J/C"], exp: "Electric field intensity is defined as force per unit charge (E = F/q), so its SI unit is Newtons per Coulomb (N/C)." },
+            { q: 6, a: 'D', en: "Quantization of charge indicates that", hi: "आवेश का परिमाणीकरण दर्शाता है कि", opts: ["charge exists on particles", "a charge cannot be destroyed", "there exists a minimum permissible charge on a particle", "charge, which is a fraction of charge on an electron, is not possible"], exp: "The principle of quantization of charge states that the total charge on a body is always an integral multiple of the elementary charge 'e', meaning fractional charges are not possible." },
+            { q: 7, a: 'C', en: "The value of electric potential at a distance r due to a point charge is", hi: "बिन्दु आवेश के कारण दूरी पर वैद्युत विभव का मान", opts: ["proportional to r", "proportional to $r^2$", "inversely proportional to r", "inversely proportional to $r^2$"], exp: "The electric potential (V) from a point charge is given by V = kq/r, showing it is inversely proportional to the distance r." },
+            { q: 8, a: 'B', en: "The S.I. unit of permittivity of free space is", hi: "निर्वात की वैद्युतशीलता का S.I. मात्रक है", opts: ["$C^{2}Nm^{2}$", "$C^{2}N^{-1}m^{-2}$", "$N^{-1}C^{-1}m^{2}$", "$NC^{-2}m^{2}$"], exp: "From Coulomb's law, the unit for permittivity of free space ($\\epsilon_{0}$) is derived as Coulomb squared per Newton-meter squared ($C^{2}N^{-1}m^{-2}$)." },
+            { q: 9, a: 'D', en: "An electric field can deflect", hi: "एक वैद्युत क्षेत्र विक्षेपित कर सकता है", opts: ["neutrons", "gamma-rays", "X-rays", "a-particles"], exp: "An electric field only exerts a force on charged particles. Alpha-particles are positively charged and are therefore deflected." },
+            { q: 10, a: 'C', en: "How many electrons are there in one coulomb charge?", hi: "एक कूलॉम आवेश में कितने इलेक्ट्रॉन होते हैं?", opts: ["$1.6\\times10^{19}$", "$1.6\\times10^{-19}$", "$6.25\\times10^{18}$", "$6.25\\times10^{-18}$"], exp: "The number of electrons is calculated by dividing the total charge (1 C) by the charge of a single electron ($1.6 \\times 10^{-19}$ C), which equals $6.25 \\times 10^{18}$." },
+            { q: 11, a: 'A', en: "The energy of an electron on accelerating it to 1 volt potential difference is", hi: "1 वोल्ट विभवान्तर पर त्वरित करने पर इलेक्ट्रॉन की ऊर्जा होती है", opts: ["1 eV", "1 watt", "1 joule", "1 erg"], exp: "By definition, one electron-volt (eV) is the energy an electron gains when accelerated through a potential difference of one volt." },
+            { q: 12, a: 'D', en: "Inside a closed surface, n electric dipoles are situated. The total electric flux coming out from the closed surface will be", hi: "एक बंद पृष्ठ के भीतर n वैद्युत द्विध्रुव स्थित हैं। बंद पृष्ठ से निर्गत कुल वैद्युत फ्लक्स होगा", opts: ["$\\frac{q}{\\epsilon_{0}}$", "$\\frac{nq}{\\epsilon_{0}}$", "$\\frac{2q}{\\epsilon_{0}}$", "zero"], exp: "According to Gauss's law, total electric flux depends on the net enclosed charge. Since an electric dipole has a net charge of zero, the total flux from 'n' dipoles is also zero." },
+            { q: 13, a: 'D', en: "When a capacitor of capacitance C is given a charge q, the energy stored is W. If the charge is increased to 2q, then the energy stored will be", hi: "C धारिता के संधारित्र को q आवेश देने पर संचित ऊर्जा W है। यदि आवेश बढ़ाकर 2q कर दिया जाये तो संचित ऊर्जा होगी", opts: ["$\\frac{W}{2}$", "2W", "$\\frac{W}{4}$", "4W"], exp: "The energy stored in a capacitor is proportional to the square of the charge ($W \\propto q^2$). Doubling the charge makes the energy $2^2 = 4$ times larger." },
+            { q: 14, a: 'C', en: "Three capacitors of equal capacitances C are first connected in parallel and then in series. The ratio of equivalent capacitances in the two cases will be", hi: "तीन बराबर धारिता C वाले संधारित्रों को पहले समान्तर क्रम में तथा बाद में श्रेणीक्रम में जोड़ा जाता है। दोनों दशाओं में तुल्य धारिताओं का अनुपात होगा", opts: ["3:1", "6:1", "9:1", "1:9"], exp: "In parallel, the capacitance is $C_p = 3C$. In series, it is $C_s = C/3$. The ratio $C_p/C_s$ is $3C / (C/3)$, which equals 9:1." },
+            { q: 15, a: 'D', en: "When a capacitor of $100~\\mu F$ capacitance is charged to 100 volts, the energy stored in it will be", hi: "$100~\\mu F$ धारिता वाले संधारित्र को 100 वोल्ट तक आवेशित करने पर उसमें संचित ऊर्जा होगी", opts: ["100 J", "50 J", "5 J", "0.5 J"], exp: "Using the formula for stored energy $U = \\frac{1}{2}CV^2$, the calculation is $0.5 \\times (100 \\times 10^{-6} F) \\times (100 V)^2 = 0.5 J$." },
+            { q: 16, a: 'A', en: "When an electron is brought closer to another electron, then the electric potential energy of the system", hi: "एक इलेक्ट्रॉन को दूसरे इलेक्ट्रॉन के अधिक समीप लाने पर निकाय की वैद्युत स्थितिज ऊर्जा", opts: ["increases", "decreases", "remains constant", "may increase or decrease"], exp: "Since both electrons have like charges, work must be done against the repulsive force to bring them closer, increasing the system's potential energy." },
+            { q: 17, a: 'C', en: "$1CV^{-1}$ is equivalent to", hi: "$1CV^{-1}$ is equivalent to", opts: ["$1~\\mu F$", "1 nF", "1 F", "1 pF"], exp: "The unit of capacitance, the Farad (F), is defined as one Coulomb per Volt (C/V)." },
+            { q: 18, a: 'A', en: "The electrical capacity of a spherical conductor is 1 pF. Its radius will be", hi: "एक गोलाकार चालक की विद्युतीय धारिता 1 pF है। इसकी त्रिज्या होगी", opts: ["$9\\times10^{-3}m$", "$9\\times10^{3}m$", "$9\\times10^{-12}m$", "$9\\times10^{12}m$"], exp: "For a spherical conductor, radius $R = C \\times k$. With $C = 1 \\times 10^{-12}$ F and $k = 9 \\times 10^9 N \\cdot m^2/C^2$, the radius is $9 \\times 10^{-3}$ m." },
+            { q: 19, a: 'B', en: "If a unit positive charge is kept in the air, then the total flux coming out of this unit charge is", hi: "यदि एक इकाई धनात्मक आवेश को हवा में रखा जाए, तो इकाई आवेश से निकलने वाला कुल फ्लक्स होगा", opts: ["$\\epsilon_{0}$", "$\\epsilon_{0}^{-1}$", "$4\\pi~\\epsilon_{0}$", "$4\\pi~\\epsilon_{0}^{-1}$"], exp: "By Gauss's Law, total electric flux $\\Phi = q_{enclosed} / \\epsilon_{0}$. For a unit charge (q=1), the flux is $1/\\epsilon_{0}$ or $\\epsilon_{0}^{-1}$." },
+            { q: 20, a: 'D', en: "Two plates, each having area A, are placed parallel to each other at a small distance d. They have charges +q and -q respectively. The electric field in the space between the plates will be", hi: "दो प्लेटें, जिनमें प्रत्येक का क्षेत्रफल A है, अल्प दूरी पर एक दूसरे के समान्तर रखी हैं। उन पर क्रमशः + q a - q का आवेश है। प्लेटों के बीच के स्थान में वैद्युत क्षेत्र होगा", opts: ["$\\frac{\\epsilon_{0}A}{qd}$", "$\\frac{\\epsilon_{0}q}{Ad}$", "$\\frac{q}{2~\\epsilon_{0}A}$", "$\\frac{q}{\\epsilon_{0}A}$"], exp: "The electric field between the plates is given by $E = \\sigma/\\epsilon_0$, where the surface charge density $\\sigma=q/A$. This gives $E = q/(\\epsilon_0 A)$." },
+            { q: 21, a: 'A', en: "An electric dipole is kept in a non-uniform electric field. It generally experiences", hi: "एक वैद्युत द्विध्रुव को असमान वैद्युत क्षेत्र में रखा जाता है। यह सामान्यतः अनुभव करता है", opts: ["a force and a torque", "only a force", "only a torque", "neither a force nor a torque"], exp: "In a non-uniform field, the forces on the opposite ends of the dipole are unequal, resulting in both a net force and a net torque." },
+            { q: 22, a: 'B', en: "Dielectrics are", hi: "परावैद्युत होते हैं", opts: ["conducting substances", "non-conducting substances", "semi-conducting substances", "none of these"], exp: "Dielectrics are electrical insulators, which are non-conducting substances." },
+            { q: 23, a: 'A', en: "If the potential at a distance d from a point charge q is V, then the potential at distance 2d is", hi: "यदि किसी बिन्दु आवेश से दूरी पर विभव है तो दूरी 2d पर विभव होगा", opts: ["$\\frac{V}{2}$", "2V", "V", "$\\frac{V}{4}$"], exp: "Since potential from a point charge is inversely proportional to distance ($V \\propto 1/r$), doubling the distance will halve the potential." },
+            { q: 24, a: 'C', en: "A capacitor stores", hi: "संधारित्र संग्रहीत करता है", opts: ["charge", "electric potential energy", "both (A) and (B)", "none of these"], exp: "A capacitor stores electric charge on its plates, which in turn stores electric potential energy in the field between them." },
+            { q: 25, a: 'B', en: "The capacitance of a capacitor does not depend on", hi: "संधारित्र की धारिता निर्भर नहीं करती है", opts: ["area of plates", "charge on plates", "dielectric constant", "distance between plates"], exp: "Capacitance is a physical property determined by the capacitor's geometry and dielectric material, not the amount of charge it holds." },
+            { q: 26, a: 'A', en: "The Gaussian surface for a point charge is", hi: "बिन्दु आवेश के लिए गॉसियन पृष्ठ होता है", opts: ["a sphere", "a cube", "a cylinder", "a cuboid"], exp: "Due to the spherical symmetry of a point charge's electric field, a spherical Gaussian surface simplifies calculations." },
+            { q: 27, a: 'B', en: "The dielectric constant for vacuum is", hi: "निर्वात के लिए परावैद्युत स्थिरांक होता है", opts: ["zero", "equal to 1", "less than 1", "greater than 1"], exp: "By definition, the dielectric constant is a ratio relative to a vacuum, making the value for a vacuum exactly 1." },
+            { q: 28, a: 'B', en: "In which order is the voltmeter connected in the electric circuit?", hi: "वोल्टमीटर को विद्युत परिपथ में किस क्रम में जोड़ा जाता है ?", opts: ["In series", "In parallel", "Diagonally", "None of these"], exp: "A voltmeter must be connected in parallel with a component to measure the potential difference across it." },
+            { q: 29, a: 'C', en: "Which type of motion is performed by free electrons in a metal without any external field?", hi: "किसी धातु में मुक्त इलेक्ट्रॉन बिना किसी बाह्य क्षेत्र के किस प्रकार की गति करते हैं ?", opts: ["Circular motion", "Oscillatory motion", "Random motion", "Helical motion"], exp: "Due to thermal energy, free electrons in a metal move randomly, colliding with ions in the lattice." },
+            { q: 30, a: 'C', en: "Two electric field lines due to a point charge", hi: "एक बिन्दु आवेश के कारण दो वैद्युत क्षेत्र रेखाएँ", opts: ["always intersect at two points", "may intersect near the charge", "never intersect", "intersect at more than two points"], exp: "Electric field lines never intersect because the electric field at any point has only one direction." },
+            { q: 31, a: 'A', en: "The unit of surface charge density is", hi: "आवेश के पृष्ठ घनत्व का मात्रक होता है", opts: ["$Cm^{-2}$", "Cm", "$Nm^{-1}$", "$cV^{-1}$"], exp: "Surface charge density is charge per unit area, so its unit is Coulombs per square meter ($Cm^{-2}$)." },
+            { q: 32, a: 'C', en: "Coulomb force is", hi: "कूलॉम बल है", opts: ["electric force", "central force", "both (A) and (B)", "none of these"], exp: "The Coulomb force is an electric force that also acts along the line connecting the centers of the charges, making it a central force." },
+            { q: 33, a: 'D', en: "When a body is charged, then its mass", hi: "जब किसी वस्तु को आवेशित किया जाता है, तो उसका द्रव्यमान", opts: ["increases", "decreases", "remains same", "may increase or decrease"], exp: "Gaining electrons (negative charge) increases mass, while losing electrons (positive charge) decreases mass." },
+            { q: 34, a: 'C', en: "The electric potential due to a small electric dipole at a large distance r from the center of the dipole is proportional to", hi: "किसी सूक्ष्म विद्युत द्विध्रुव के मध्य बिन्दु से बहुत दूर दूरी पर विद्युत विभव समानुपाती होता है", opts: ["r", "$\\frac{1}{r}$", "$\\frac{1}{r^{2}}$", "$\\frac{1}{r^{3}}$"], exp: "For an electric dipole, the potential at a large distance 'r' is proportional to $1/r^2$." },
+            { q: 35, a: 'B', en: "The electric field intensity inside a charged hollow spherical conductor is", hi: "आवेशित खोखले गोलीय चालक के अंदर विद्युत क्षेत्र की तीव्रता होती है", opts: ["$\\frac{\\sigma}{\\epsilon_{0}}$", "zero", "$\\frac{\\epsilon_{0}}{\\sigma}$", "$\\epsilon_{0}\\sigma$"], exp: "In electrostatic equilibrium, all excess charge resides on the outer surface of a conductor, making the electric field inside zero." },
+            { q: 36, a: 'C', en: "Two resistors R and 2R are connected in series in an electric circuit. The thermal energy generated in R and 2R will be in the ratio of", hi: "दो प्रतिरोधक R एवं 2R को एक विद्युत परिपथ में श्रेणीक्रम में जोड़ा जाता है। R तथा 2R में उत्पन्न ऊष्मीय ऊर्जा का अनुपात होगा", opts: ["2:1", "4:1", "1:2", "1:4"], exp: "In a series circuit, current is constant. Since heat produced is $H=I^2Rt$, heat is proportional to resistance. The ratio is R:2R, or 1:2." },
+            { q: 37, a: 'A', en: "The relation between the drift velocity ($v_d$) and applied electric field (E) of a conductor is", hi: "किसी चालक के अपवाह वेग $(v_{d})$ तथा आरोपित विद्युत क्षेत्र (E) के बीच संबंध है", opts: ["$v_{d}\\propto E$", "$\\nu_{d}\\propto E^{2}$", "$\\nu_{d}\\propto\\sqrt{E}$", "$\\nu_{d}\\propto\\sqrt{E^{3}}$"], exp: "Drift velocity is directly proportional to the applied electric field ($v_d = (\\frac{eE}{m})\\tau$)." },
+            { q: 38, a: 'A', en: "The specific resistance of a conductor increases with", hi: "किसी चालक का विशिष्ट प्रतिरोध बढ़ता है", opts: ["increase of temperature", "decrease in length", "decrease of cross-sectional area", "increase of cross-sectional area"], exp: "For metallic conductors, higher temperatures cause more atomic vibrations, which increases resistivity." },
+            { q: 39, a: 'B', en: "At constant potential difference, the resistance of an electric circuit is halved. The value of heat produced will be", hi: "स्थिर विभवान्तर पर किसी विद्युत परिपथ का प्रतिरोध आधा कर दिया जाता है। उत्पन्न ऊष्मां का मान होगा", opts: ["half", "double", "four times", "same"], exp: "With constant voltage, heat produced is $H = (V^2/R)t$. As heat is inversely proportional to resistance, halving the resistance doubles the heat." },
+            { q: 40, a: 'A', en: "The current flowing in a wire is 1A. If the charge of an electron is 1.6×10-19 C, then the number of electrons flowing through the wire per second is", hi: "एक तार में 1A धारा प्रवाहित हो रही है। यदि इलेक्ट्रॉन का आवेश 1.6×10-19 C हो, तो प्रति सेकेण्ड तार में प्रवाहित इलेक्ट्रॉनों की संख्या है", opts: ["6.25 x 1018", "1.6×10-19", "1.6x1019", "0.625 x 1013"], exp: "The number of electrons per second is the current (1 C/s) divided by the charge of one electron ($1.6 \\times 10^{-19}$ C), which equals $6.25 \\times 10^{18}$." },
+            { q: 41, a: 'A', en: "The unit of specific resistance is", hi: "विशिष्ट प्रतिरोध का मात्रक है", opts: ["Ωm", "Ωm-1", "Ω-1m", "Ω-1m-1"], exp: "Specific resistance (resistivity, $\\rho$) has units of Ohm-meter ($\\Omega \\cdot m$)." },
+            { q: 42, a: 'D', en: "The resistance of any wire is 500 Ω. Its electrical conductance will be", hi: "किसी तार का प्रतिरोध 500 Ω है। उसकी विद्युत चालकता होगी", opts: ["500 Ω-1", "50 Ω-1", "0.02 Ω-1", "0.002 Ω-1"], exp: "Electrical conductance is the reciprocal of resistance (G = 1/R). Thus, G = 1/500 = 0.002 $\\Omega^{-1}$." },
+            { q: 43, a: 'C', en: "The equivalent resistance of two 10 ohm resistors connected in parallel is", hi: "समान्तर क्रम में जुड़े 10 ओम के दो प्रतिरोधकों का तुल्य प्रतिरोध है", opts: ["20 Ω", "15 Ω", "5 Ω", "10 Ω"], exp: "For two identical resistors (R) in parallel, the equivalent resistance is R/2. Here, it is 10/2 = 5 $\\Omega$." },
+            { q: 44, a: 'D', en: "The unit of specific conductance is", hi: "विशिष्ट चालकता का मात्रक है", opts: ["Ωm", "Ω-1m", "Ωm-1", "Ω-1m-1"], exp: "Specific conductance (conductivity) is the reciprocal of specific resistance, so its unit is $(\\Omega \\cdot m)^{-1}$ or $\\Omega^{-1}m^{-1}$." },
+            { q: 45, a: 'C', en: "A 200 watt television is used for 4 hours. How many units of electricity were spent?", hi: "200 वाट के एक टेलीविजन को 4 घण्टे तक प्रयुक्त किया जाता है। विद्युत की कितनी इकाई व्यय हुई ?", opts: ["20", "0.2", "0.8", "60"], exp: "One unit is 1 kWh. Energy = Power (kW) × Time (h) = (200/1000) kW × 4 h = 0.8 kWh." },
+            { q: 46, a: 'C', en: "The green color code value of carbon resistance is", hi: "कार्बन प्रतिरोध के हरे रंग के कोड का मान है", opts: ["3", "4", "5", "6"], exp: "In the standard resistor color code system, green represents the digit 5." },
+            { q: 47, a: 'D', en: "The product of resistivity and specific conductance of a cylindrical conductor depends on", hi: "एक बेलनाकार चालक की प्रतिरोधकता एवं विशिष्ट चालकता का गुणनफल निर्भर करता है", opts: ["temperature", "material", "cross-sectional area", "none of these"], exp: "Specific conductance is the reciprocal of resistivity. Their product is always 1 and is independent of any physical parameters." },
+            { q: 48, a: 'A', en: "Ohm's law is valid for", hi: "ओम का नियम मान्य है", opts: ["metallic conductors", "semiconductors", "both (A) and (B)", "none of these"], exp: "Ohm's law applies to ohmic materials like metals, where resistance is constant with varying voltage." },
+            { q: 49, a: 'A', en: "The power of an electric circuit is", hi: "विद्युत परिपथ की शक्ति होती है", opts: ["$\\frac{V^2}{R}$", "$V^2.R$", "$V^2.R.I$", "V.R"], exp: "Power can be expressed as $P = VI$, $P = I^2R$, or $P = V^2/R$." },
+            { q: 50, a: 'C', en: "If R is resistance and C is capacitance, then the unit of RC is", hi: "यदि R प्रतिरोध तथा C धारिता हो तो RC का मात्रक है", opts: ["joule", "ampere", "second", "volt"], exp: "The product RC is the time constant of an RC circuit and has units of seconds." },
+            { q: 51, a: 'A', en: "The dimensional formula of resistance R is", hi: "प्रतिरोध R का विमीय सूत्र है", opts: ["$[ML^2T^{-3}A^{-2}]$", "$[M^2LT^{-3}A^{-2}]$", "$[ML^{-2}T^3A^{-2}]$", "$[M^2L^{-2}T^3A^{-2}]$"], exp: "The dimensions of resistance can be derived from $P=I^2R$ as $[R] = [P]/[I]^2 = [ML^2T^{-3}]/[A^2]$." },
+            { q: 52, a: 'D', en: "A wire of resistance R is cut into ten equal parts and these parts are connected in parallel. The resistance of this combination will be", hi: "एक R प्रतिरोध के तार को दस बराबर भागों में काटकर, इन भागों को समान्तर क्रम में जोड़ा गया है। इस संयोजन का प्रतिरोध होगा", opts: ["10 R", "100 R", "0.1 R", "0.01 R"], exp: "Each part has a resistance of R/10. When 'n' identical resistors are in parallel, the equivalent is r/n. Here, (R/10)/10 = R/100 = 0.01R." },
+            { q: 53, a: 'D', en: "How much energy will be consumed in 1 minute by a 1 kilowatt electric bulb?", hi: "1 किलोवाट के विद्युत बल्ब में 1 मिनट में कितनी ऊर्जा व्यय होगी ?", opts: ["60 J", "600 J", "$6 \\times 10^3 J$", "$6 \\times 10^4 J$"], exp: "Energy = Power × Time = (1000 J/s) × (60 s) = 60,000 J or $6 \\times 10^4$ J." },
+            { q: 54, a: 'A', en: "The formula V = IR is valid for", hi: "सूत्र V = IR सत्य है", opts: ["ohmic resistance", "non-ohmic resistance", "both (A) and (B)", "none of these"], exp: "The formula V=IR is the definition of Ohm's law, which applies to ohmic materials where resistance is constant." },
+            { q: 55, a: 'C', en: "A wire of resistance R is cut into n equal parts and connected in series. The equivalent resistance of this combination will be", hi: "R प्रतिरोध के तार को n बराबर भागों में काटकर श्रेणीक्रम में जोड़ा जाता है। इस संयोजन का तुल्य-प्रतिरोध होगा", opts: ["$n^2R$", "$\\frac{R}{n^2}$", "R", "nR"], exp: "Each part has a resistance of R/n. In series, the total resistance is the sum, so $R_{eq} = n \\times (R/n) = R$." },
+            { q: 56, a: 'D', en: "Which physical quantity is represented by the slope of a V-I graph?", hi: "V-I ग्राफ की ढाल किस भौतिक राशि को दर्शाती है ?", opts: ["Potential", "Current", "Power", "Resistance"], exp: "According to Ohm's law (V=IR), the slope of a Voltage vs. Current graph ($\\Delta V / \\Delta I$) is resistance (R)." },
+            { q: 57, a: 'A', en: "The resistance of an ideal voltmeter is", hi: "आदर्श वोल्टमीटर का प्रतिरोध होता है", opts: ["infinite", "zero", "less than one ohm", "one ohm"], exp: "An ideal voltmeter has infinite resistance so it draws no current from the circuit it is measuring." },
+            { q: 58, a: 'B', en: "Which quantity remains the same in a series connection of resistors?", hi: "प्रतिरोधों के श्रेणीक्रम में कौन-सी राशि समान रहती है ?", opts: ["Voltage", "Current", "Both (A) and (B)", "None of these"], exp: "In a series circuit, there is only one path for the current, so it is the same through all components." },
+            { q: 59, a: 'B', en: "An electric bulb is marked 220-100 W. The resistance of its filament will be", hi: "एक विद्युत बल्ब पर 220-100 W लिखा है। इसमें फिलामेंट का प्रतिरोध होगा", opts: ["100 Ω", "484 Ω", "220 Ω", "320 Ω"], exp: "Using the formula $P = V^2/R$, the resistance is $R = V^2/P = (220)^2 / 100 = 484 \\Omega$." },
+            { q: 60, a: 'C', en: "1 joule is equivalent to", hi: "1 जूल तुल्य है", opts: ["4.18 cal", "0.42 cal", "0.24 cal", "4.80 cal"], exp: "The conversion is 1 calorie ≈ 4.184 J. Therefore, 1 J ≈ 1/4.184 cal ≈ 0.24 cal." },
+            { q: 61, a: 'B', en: "When two bodies are rubbed together, they become equally and oppositely charged. This is called", hi: "दो पिण्डों को आपस में रगड़ने पर दोनों पिण्ड समान रूप से धनाविष्ट और ऋणाविष्ट हो जाते हैं। इसे कहा जाता है", opts: ["Law of conservation of energy", "Law of conservation of charge", "Law of conservation of mass", "None of these"], exp: "This demonstrates the law of conservation of charge, where charge is transferred, not created or destroyed." },
+            { q: 62, a: 'A', en: "Kirchhoff's current law is a result of the conservation of", hi: "किरचॉफ का धारा नियम किसके संरक्षण के परिणामस्वरूप है ?", opts: ["charge", "energy", "mass", "momentum"], exp: "The current law (junction rule) is based on the conservation of charge, as charge cannot accumulate at a junction." },
+            { q: 63, a: 'C', en: "If R1 and R2 are the total internal and total external resistances respectively in a combination of cells, then the series combination of the cells is useful when", hi: "यदि सेलों के संयोजन में $R_{1}triangleleft R_{2}$ क्रमशः कुल आन्तरिक तथा कुल बाह्य प्रतिरोध हों, तो सेलों का श्रेणीक्रम संयोजन उपयोगी होता है जब", opts: ["$R_1 = R_2$", "$R_1 > R_2$", "$R_1 < R_2$", "none of these"], exp: "A series combination of cells is most effective when the total external resistance is much larger than the total internal resistance." },
+            { q: 64, a: 'A', en: "If the resistance of each arm of a balanced Wheatstone bridge and the galvanometer is R, then the total resistance between the ends connecting the battery is", hi: "यदि सन्तुलित ह्वीटस्टोन ब्रिज की प्रत्येक भुजा तथा धारामापी का प्रतिरोध R है तब बैट्री को जोड़ने वाले सिरों के बीच कुल प्रतिरोध होता है", opts: ["R", "$\\frac{R}{2}$", "2R", "$\\frac{R}{4}$"], exp: "In a balanced bridge, the galvanometer can be ignored. This leaves two parallel branches, each with resistance 2R. The total equivalent resistance of these two branches is R." },
+            { q: 65, a: 'B', en: "n equal resistors are first connected in series and then in parallel. The ratio of maximum and minimum resistances will be", hi: "n समान प्रतिरोधक पहले श्रेणीक्रम में फिर समान्तर क्रम में जोड़े जाते हैं। अधिकतम तथा न्यूनतम प्रतिरोधों का अनुपात होगा", opts: ["n", "$n^2$", "$\\frac{1}{n}$", "$\\frac{1}{n^2}$"], exp: "The maximum resistance (series) is $R_s = nR$. The minimum resistance (parallel) is $R_p = R/n$. The ratio $R_s/R_p$ is $n^2$." },
+            { q: 66, a: 'A', en: "If the resistance of a conductor wire is R, length l, cross-sectional area A and resistivity $\\rho$, then", hi: "यदि किसी चालक तार का प्रतिरोध R, लम्बाई l , अनुप्रस्थ काट का क्षेत्रफल A तथा प्रतिरोधकता $\\rho$ है, तब", opts: ["$\\rho=\\frac{RA}{l}$", "$R=\\frac{A}{\\rho l}$", "$\\rho=\\frac{RA}{l^2}$", "$R=\\frac{A}{\\rho l^2}$"], exp: "The formula for resistance is $R = \\rho(l/A)$. Rearranging for resistivity gives $\\rho = RA/l$." },
+            { q: 67, a: 'C', en: "A potentiometer is used to", hi: "विभवमापी प्रयुक्त होता है", opts: ["measure the internal resistance of a cell", "compare electromotive forces (emfs) of two sources", "both (A) and (B)", "none of these"], exp: "A potentiometer's key applications include comparing EMFs and measuring the internal resistance of a cell." },
+            { q: 68, a: 'B', en: "A source of electromotive force (emf) $\\epsilon$, which has internal resistance r, is connected to an external resistance R. Then voltage $V_{ext}$ across R will be", hi: "विद्युत वाहक बल (emf) $\\epsilon$ के एक स्रोत, जिसका आंतरिक प्रतिरोध r है, को बाह्य प्रतिरोध R से संयोजित किया जाता है तो R पर वोल्टता $V_{ext}$ होगी", opts: ["$V_{ext}=\\epsilon\\frac{r}{R}$", "$V_{ext}=\\epsilon\\frac{R}{(r+R)}$", "$V_{ext}=\\epsilon\\frac{(r+R)}{R}$", "$V_{ext}=\\epsilon\\frac{R}{r}$"], exp: "The current is $I = \\epsilon/(r+R)$. The voltage across the external resistor is $V_{ext} = I \\times R$." },
+            { q: 69, a: 'C', en: "When a current of 2 amperes is passed through an electric circuit for 5 minutes, 1200 joules of work is done by the cell. The electromotive force (emf) of the cell will be", hi: "किसी वैद्युत परिपथ में 2 ऐम्पियर की धारा 5 मिनट तक प्रवाहित करने पर सेल द्वारा 1200 जूल कार्य किया जाता है। सेल का विद्युत वाहक बल (emf) होगा", opts: ["12 V", "20 V", "2 V", "none of these"], exp: "First, find the total charge: $q = I \\times t = 2A \\times (300s) = 600 C$. Then, EMF is $\\epsilon = W/q = 1200J / 600C = 2V$." },
+            { q: 70, a: 'A', en: "The SI unit of mobility (µ) is", hi: "गतिशीलता (µ) का SI मात्रक है", opts: ["$\\frac{m^{2}}{Vs}$", "$\\frac{m}{vs^{2}}$", "$\\frac{Vs}{m^{2}}$", "$\\frac{vs^{2}}{m}$"], exp: "Mobility is defined as drift velocity per unit electric field ($\\mu = v_d/E$). Its SI unit is $m^2 V^{-1} s^{-1}$." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const answerKeyContainer = document.querySelector('#answer-key-content .grid');
+
+        questionsData.forEach((data, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card bg-white rounded-lg shadow-md p-6';
+            
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            let optionsHTML = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">';
+            data.opts.forEach((opt, i) => {
+                const isCorrect = optionLabels[i] === data.a;
+                optionsHTML += `
+                    <div class="option-item flex items-center p-3 rounded-md border border-slate-200 ${isCorrect ? 'correct' : ''}">
+                        <span class="font-semibold mr-3">${optionLabels[i]}.</span>
+                        <span>${opt}</span>
+                    </div>
+                `;
+            });
+            optionsHTML += '</div>';
+
+            card.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-900">Question ${data.q}</h3>
+                        <p class="mt-2 text-slate-700">${data.en}</p>
+                        <p class="mt-1 text-slate-500 text-sm">${data.hi}</p>
+                    </div>
+                    <button onclick="toggleAnswer(${index})" class="text-sm bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex-shrink-0 ml-4">
+                        Show Answer
+                    </button>
+                </div>
+                <div id="answer-${index}" class="hidden mt-4">
+                    ${optionsHTML}
+                    <div class="answer-section mt-4 p-4 rounded-md">
+                        <p class="font-semibold">Correct Option: ${data.a}</p>
+                        <p class="mt-2 text-slate-600"><span class="font-medium">Explanation:</span> ${data.exp}</p>
+                    </div>
+                </div>
+            `;
+            questionsContainer.appendChild(card);
+
+            const keyItem = document.createElement('div');
+            keyItem.className = 'bg-slate-100 p-2 rounded-md font-mono';
+            keyItem.textContent = `${data.q}-${data.a}`;
+            answerKeyContainer.appendChild(keyItem);
+        });
+
+        function toggleAnswer(index) {
+            const answerDiv = document.getElementById(`answer-${index}`);
+            const button = answerDiv.parentElement.querySelector('button');
+            const isHidden = answerDiv.classList.contains('hidden');
+            
+            if (isHidden) {
+                answerDiv.classList.remove('hidden');
+                button.textContent = 'Hide Answer';
+            } else {
+                answerDiv.classList.add('hidden');
+                button.textContent = 'Show Answer';
+            }
+        }
+
+        function toggleAnswerKey() {
+            const answerKeyContent = document.getElementById('answer-key-content');
+            const arrow = document.getElementById('answer-key-arrow');
+            answerKeyContent.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        window.onload = () => {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        };
+    </script>
+</body>
+</html>
